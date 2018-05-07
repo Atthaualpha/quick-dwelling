@@ -6,10 +6,19 @@ import { AppComponent } from './app.component';
 import { LightsComponent } from './components/lights/lights.component';
 import { DoorsComponent } from './components/doors/doors.component';
 import { MatInputModule } from '@angular/material/input';
+import { WindowComponent } from './components/window/window.component';
+import { AppRouter } from './router';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent, LightsComponent, DoorsComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, MatInputModule],
+  declarations: [
+    AppComponent,
+    LightsComponent,
+    DoorsComponent,
+    WindowComponent,
+    HomeComponent
+  ],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRouter, MatInputModule],
   providers: [],
   bootstrap: [AppComponent]
 })
