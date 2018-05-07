@@ -1,0 +1,22 @@
+{
+  "name": "dwelling-rear",
+  "version": "1.0.0",
+  "description": "Back-end quick-dwelling",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "johnny-five": "^0.14.3",
+    "socker.io": "0.0.0-alpha-beta",
+    "socket.io": "^2.1.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.4"
+  }
+}
