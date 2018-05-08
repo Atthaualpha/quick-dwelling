@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketioService } from '../../services/socketio.service';
 
 @Component({
   selector: 'app-doors',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./doors.component.css']
 })
 export class DoorsComponent implements OnInit {
+  constructor(private socketService: SocketioService) {}
 
-  constructor() { }
+  private socket;
 
   ngOnInit() {
-  }
+    this.socket = this.socketService.getSocket();
 
+  }
 }

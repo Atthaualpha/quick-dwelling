@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketioService } from '../../services/socketio.service';
 
 @Component({
   selector: 'app-lights',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lights.component.css']
 })
 export class LightsComponent implements OnInit {
+  constructor(private socketService: SocketioService) {}
 
-  constructor() { }
+  private socket;
 
   ngOnInit() {
-  }
+    this.socket = this.socketService.getSocket();
 
+  }
 }
