@@ -10,6 +10,8 @@ import { WindowComponent } from './components/window/window.component';
 import { AppRouter } from './router';
 import { HomeComponent } from './components/home/home.component';
 import { SocketioService } from './services/socketio.service';
+import { EventDoorsComponent } from './components/event-doors/event-doors.component';
+import { EventLightsComponent } from './components/event-lights/event-lights.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SocketioService } from './services/socketio.service';
     LightsComponent,
     DoorsComponent,
     WindowComponent,
-    HomeComponent
+    HomeComponent,
+    EventDoorsComponent,
+    EventLightsComponent
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRouter, MatInputModule],
   providers: [SocketioService],

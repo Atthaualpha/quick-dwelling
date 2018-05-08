@@ -5,6 +5,8 @@ import { DoorsComponent } from './components/doors/doors.component';
 import { LightsComponent } from './components/lights/lights.component';
 import { WindowComponent } from './components/window/window.component';
 import { HomeComponent } from './components/home/home.component';
+import { EventLightsComponent } from './components/event-lights/event-lights.component';
+import { EventDoorsComponent } from './components/event-doors/event-doors.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +29,14 @@ export const routes: Routes = [
   {
     path: 'window',
     component: WindowComponent
+  },
+  {
+    path: 'eventlights/:led',
+    component: EventLightsComponent
+  },
+  {
+    path: 'eventdoors/:door',
+    component: EventDoorsComponent
   }
 ];
 

@@ -37,6 +37,9 @@
               },
               {
                 "input": "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              },
+              {
+                "input": "src/assets/animate.css"
               }
             ],
             "scripts": [

@@ -1,36 +1,33 @@
 <div class="container-fluid">
   <div style="margin-top: 5%">
-    <div class="row align-items-center text-center" >
-      <div class="col align-self-start" style="cursor: pointer;">
+    <div class="row align-items-center text-center slideInLeft animated" >
+      <div class="col align-self-start" style="cursor: pointer;" [routerLink]="['/eventlights', 'home']"
+      routerLinkActive="router-link-active">
         <i class="fas fa-home fa-9x"></i>
         <p>Entrada</p>
       </div>
-      <div class="col align-self-center" style="cursor: pointer;">
+      <div class="col align-self-center" style="cursor: pointer;" [routerLink]="['/eventlights', 'dining']">
         <i class="fas fa-couch fa-9x"></i>
         <p>Sala comedor</p>
       </div>
-      <div class="col align-self-end" style="cursor: pointer;">
+      <div class="col align-self-end" style="cursor: pointer;" [routerLink]="['/eventlights', 'kitchen']">
         <i class="fas fa-utensils fa-9x"></i>
         <p>Cocina</p>
       </div>
     </div>
-    <div class="row align-items-center text-center">
-      <div class="col align-self-start" style="cursor: pointer;">
+    <div class="row align-items-center text-center slideInRight animated">
+      <div class="col align-self-start" style="cursor: pointer;" [routerLink]="['/eventlights', 'bed']">
         <i class="fas fa-bed fa-9x"></i>
         <p>Habitación principal</p>
       </div>
-      <div class="col align-self-center" style="cursor: pointer;" >
+      <div class="col align-self-center" style="cursor: pointer;" [routerLink]="['/eventlights', 'bath']" >
         <i class="fas fa-bath fa-9x"></i>
         <p>Baño</p>
       </div>
-      <div class="col align-self-end" style="cursor: pointer;">
+      <div class="col align-self-end" style="cursor: pointer;" [routerLink]="['/eventlights', 'wash']">
         <i class="fas fa-trash-alt fa-9x"></i>
         <p>Cuarto de aseo</p>
       </div>
     </div>
   </div>
 </div>
-
-
-<i class="fas fa-power-off" style="color: green"></i>
-<i class="fas fa-power-off" style="color: red"></i>

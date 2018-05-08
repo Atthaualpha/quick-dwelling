@@ -7,12 +7,9 @@ import { SocketioService } from '../../services/socketio.service';
   styleUrls: ['./lights.component.css']
 })
 export class LightsComponent implements OnInit {
-  constructor(private socketService: SocketioService) {}
-
-  private socket;
+  constructor() {}
 
   ngOnInit() {
-    this.socket = this.socketService.getSocket();
 
   }
 }
