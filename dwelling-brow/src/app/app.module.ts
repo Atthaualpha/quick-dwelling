@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { WindowComponent } from './components/window/window.component';
 import { AppRouter } from './router';
 import { HomeComponent } from './components/home/home.component';
+import { SocketioService } from './services/socketio.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { HomeComponent } from './components/home/home.component';
     HomeComponent
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRouter, MatInputModule],
-  providers: [],
+  providers: [SocketioService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

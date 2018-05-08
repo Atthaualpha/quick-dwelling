@@ -6,10 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private urlIo = 'http://localhost:4028';
-  private socket;
 
   ngOnInit() {
-     // this.socket = io.connect(this.urlIo);
+
   }
+
 }
