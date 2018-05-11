@@ -15,4 +15,10 @@ export class WindowComponent implements OnInit {
   ngOnInit() {
     this.socket = this.socketService.getSocket();
   }
+
+  girarVentana(dir: string) {
+    this.socket.emit('wheelWindow', dir, (status) => {
+      console.log(status);
+    });
+  }
 }
