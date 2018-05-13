@@ -26,8 +26,6 @@ export class EventDoorsComponent implements OnInit {
   }
 
   rollEvent() {
-    this.socket.emit('rollup-rollover', this.door, this.status, state => {
-      this.status = state;
-    });
+    this.socket.emit('rollup-rollover', this.door);
   }
 }
