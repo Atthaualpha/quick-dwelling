@@ -19,15 +19,14 @@ export class EventLightsComponent implements OnInit {
   ngOnInit() {
     this.led = this.route.snapshot.paramMap.get('led');
     this.socket = this.socketService.getSocket();
-    this.socket.emit('statusLed', this.led, (state) => {
+    this.socket.emit('statusLed', this.led);
+    this.socket.on('sendState', state => {
       this.status = state;
     });
+
   }
 
   rollEvent() {
-    this.socket.emit('cool-burn', this.led, this.status, (state) => {
-      this.status = state;
-    });
+    this.socket.emit('cool-burn', this.led, this.status);
   }
-
 }

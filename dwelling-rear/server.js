@@ -4,18 +4,16 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const j5 = require('johnny-five');
 var board;
-var board = new j5.Board({
-  repl: false
-});
+// var board = new j5.Board({
+//   repl: false
+// });
 
-const leds = { home: 9, dining: 8, kitchen: 7, wash: 6, bath: 5, bed: 4 };
-const doors = { home: 0, bed: 1, bath: 2 };
 const window = [11, 10, 9, 8];
 var stepRotation;
 var doorsEngine;
 var windowStep;
 
-board.on('ready', function() {
+// board.on('ready', function() {
   // doorsEngine = new j5.Servos([5, 6, 7]);
   // doorsEngine.to(90);
   // var stepper = new j5.Stepper({
@@ -28,52 +26,44 @@ board.on('ready', function() {
   //   console.log("done");
   // });
   
-});
+// });
 
 app.use(morgan('dev'));
 
 app.get('/', function(req, res) {
   res.send('Hello from server for quick-dwelling :D');
-  board.i2cConfig();
-  board.i2cWrite(0x08,'hello world'.split('').map(function (c) { return c.charCodeAt(0); }));
-  board.i2cReadOnce(0x08,3,function(byter){
-    console.log(byter);
-    for (let index = 0; index  <= byter.length; index++) {
-     console.log(String.fromCharCode(byter[index]));
-    }
-  });
+  // board.i2cConfig();
+  // board.i2cWrite(0x08,'hello world'.split('').map(function (c) { return c.charCodeAt(0); }));
+  // board.i2cReadOnce(0x08,3,function(byter){
+  //   console.log(byter);
+  //   for (let index = 0; index  <= byter.length; index++) {
+  //    console.log(String.fromCharCode(byter[index]));
+  //   }
+  // });
 });
+
+
 
 io.on('connection', function(socket) {
   /* LED */
   // check if led is on or off
-  socket.on('statusLed', (led, fn) => {
-    board.pinMode(leds[led], j5.Pin.INPUT);
-    var status;
-    board.digitalRead(leds[led], function(value) {
-      if (status == undefined) {
-        status = value;
-        if (status == 1) {
-          board.pinMode(leds[led], j5.Pin.OUTPUT);
-          board.digitalWrite(leds[led], 1);
-          fn('afire');
-        } else {
-          fn('quench');
-        }
-      }
-    });
+  socket.on('statusLed', (led) => {
+    // console.log(led);     
+    socket.broadcast.emit('ledState',led);        
+  });    
+
+  socket.on('getstate', (data) =>{
+    console.log(data,'broad');  
+    socket.broadcast.emit('sendState', data);                
   });
 
+  
   // set close or open a specific led
-  socket.on('cool-burn', (led, status, fn) => {
-    board.pinMode(leds[led], j5.Pin.OUTPUT);
-    if (status == 'afire') {
-      board.digitalWrite(leds[led], 0);
-      fn('quench');
-    } else {
-      board.digitalWrite(leds[led], 1);
-      fn('afire');
-    }
+  socket.on('cool-burn', (led, status) => {
+    //io.emit('ledEvent', led, status);
+    console.log(led, status);
+    socket.broadcast.emit('ledEvent',led ,status);        
+    
   });
 
   /* DOORS */

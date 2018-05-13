@@ -1,8 +1,0 @@
-version: '3'
-services:
-  serverio:
-    build: '.'
-    ports:
-      - "4200:4200"
-    volumes:
-      - '/src/node_modules'
