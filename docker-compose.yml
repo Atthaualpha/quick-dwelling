@@ -1,14 +1,14 @@
 version: '3'
 services:
-  webcli:
-    build: './dwelling-brow'
-    ports:
-      - "4200:4200"
-    volumes:
-      - '/src/node_modules'
   servecloud:
     build: './dwelling-rear'
     ports:
      - "4028:4028"
     volumes:
       - '/src/node_modules'
+  webcli:
+    build: './dwelling-brow'
+    ports:
+      - "4200:4200"
+    volumes:
+      - '/src/node_modules'  
