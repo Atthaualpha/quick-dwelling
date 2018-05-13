@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./event-doors.component.css']
 })
 export class EventDoorsComponent implements OnInit {
-
   constructor(
     private route: ActivatedRoute,
     private socketService: SocketioService
@@ -20,15 +19,15 @@ export class EventDoorsComponent implements OnInit {
   ngOnInit() {
     this.door = this.route.snapshot.paramMap.get('door');
     this.socket = this.socketService.getSocket();
-    this.socket.emit('statusDoor', this.door, (state) => {
+    this.socket.emit('statusDoor', this.door);
+    this.socket.on('resStateDoor', state => {
       this.status = state;
     });
   }
 
   rollEvent() {
-    this.socket.emit('rollup-rollover', this.door, this.status, (state) => {
+    this.socket.emit('rollup-rollover', this.door, this.status, state => {
       this.status = state;
     });
   }
-
 }

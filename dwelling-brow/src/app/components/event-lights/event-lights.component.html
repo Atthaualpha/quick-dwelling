@@ -2,13 +2,13 @@
   <div style="margin-top: 5%">
     <div class="row align-items-center text-center">
       <div class="col align-self-start zoomIn animated" style="cursor: pointer;" *ngIf="status=='afire'" (click)="rollEvent()">
-        <i class="fas fa-power-off fa-9x" style="color: #24fb00"></i>
+        <i class="fas fa-power-off fa-9x" style="color:red "></i>
         <p class="h5">
           <em>Pulsame para apagarme</em>
         </p>
       </div>
       <div class="col align-self-start zoomIn animated" style="cursor: pointer;" *ngIf="status=='quench'" (click)="rollEvent()">
-        <i class="fas fa-power-off fa-9x" style="color: red"></i>
+        <i class="fas fa-power-off fa-9x" style="color: #24fb00"></i>
         <p class="h5">
           <em>Pulsame para encenderme</em>
         </p>

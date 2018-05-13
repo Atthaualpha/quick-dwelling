@@ -2,13 +2,13 @@
   <div style="margin-top: 5%">
     <div class="row align-items-center text-center">
       <div class="col align-self-start zoomIn animated" style="cursor: pointer;" *ngIf="status=='over'" (click)="rollEvent()">
-        <i class="fas fa-lock fa-9x" style="color: #24fb00"></i>
+        <i class="fas fa-door-closed fa-9x" style="color: #24fb00"></i>
         <p class="h5">
           <em>Pulsame para abrirme</em>
         </p>
       </div>
       <div class="col align-self-start zoomIn animated" style="cursor: pointer;" *ngIf="status=='roll'" (click)="rollEvent()">
-        <i class="fas fa-lock-open fa-9x" style="color: red"></i>
+        <i class="fas fa-door-open fa-9x" style="color: red"></i>
         <p class="h5">
           <em>Pulsame para cerrarme</em>
         </p>

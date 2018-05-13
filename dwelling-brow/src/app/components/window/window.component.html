@@ -1,3 +1,18 @@
-<button (click)="girarVentana('down')">
-  Down</button>
-<button (click)="girarVentana('up')">up</button>
+<div class="container-fluid">
+  <div style="margin-top: 5%">
+    <div class="row align-items-center text-center">
+      <div class="col align-self-start zoomIn animated" style="cursor: pointer;" *ngIf="status=='down'" (click)="wheelWindow()">
+        <i class="fas fa-angle-double-up fa-9x" style="color: #24fb00"></i>
+        <p class="h5">
+          <em>Pulsame para abrirme</em>
+        </p>
+      </div>
+      <div class="col align-self-start zoomIn animated" style="cursor: pointer;" *ngIf="status=='up'" (click)="wheelWindow()">
+        <i class="fas fa-angle-double-down fa-9x" style="color: red"></i>
+        <p class="h5">
+          <em>Pulsame para cerrarme</em>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

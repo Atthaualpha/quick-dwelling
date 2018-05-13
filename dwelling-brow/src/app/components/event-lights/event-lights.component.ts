@@ -20,10 +20,9 @@ export class EventLightsComponent implements OnInit {
     this.led = this.route.snapshot.paramMap.get('led');
     this.socket = this.socketService.getSocket();
     this.socket.emit('statusLed', this.led);
-    this.socket.on('sendState', state => {
+    this.socket.on('resStateLed', state => {
       this.status = state;
     });
-
   }
 
   rollEvent() {

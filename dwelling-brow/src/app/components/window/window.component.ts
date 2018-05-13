@@ -7,18 +7,20 @@ import { SocketioService } from '../../services/socketio.service';
   styleUrls: ['./window.component.css']
 })
 export class WindowComponent implements OnInit {
-
   constructor(private socketService: SocketioService) {}
 
+  status;
   private socket;
 
   ngOnInit() {
     this.socket = this.socketService.getSocket();
+    this.socket.emit('statusWindow');
+    this.socket.on('resWindowState', state => {
+      this.status = state;
+    });
   }
 
-  girarVentana(dir: string) {
-    this.socket.emit('wheelWindow', dir, (status) => {
-      console.log(status);
-    });
+  wheelWindow() {
+    this.socket.emit('wheelWindow', this.status);
   }
 }

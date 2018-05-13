@@ -13,18 +13,18 @@ var doorsEngine;
 var windowStep;
 
 // board.on('ready', function() {
-  // doorsEngine = new j5.Servos([5, 6, 7]);
-  // doorsEngine.to(90);
-  // var stepper = new j5.Stepper({
-  //   type: j5.Stepper.TYPE.FOUR_WIRE,
-  //   stepsPerRev: 50,
-  //   pins: [11,10,9,8]
-  // });
+// doorsEngine = new j5.Servos([5, 6, 7]);
+// doorsEngine.to(90);
+// var stepper = new j5.Stepper({
+//   type: j5.Stepper.TYPE.FOUR_WIRE,
+//   stepsPerRev: 50,
+//   pins: [11,10,9,8]
+// });
 
-  // stepper.rpm(300).ccw().step(512, function() {
-  //   console.log("done");
-  // });
-  
+// stepper.rpm(300).ccw().step(512, function() {
+//   console.log("done");
+// });
+
 // });
 
 app.use(morgan('dev'));
@@ -41,53 +41,49 @@ app.get('/', function(req, res) {
   // });
 });
 
-
-
 io.on('connection', function(socket) {
   /* LED */
   // check if led is on or off
-  socket.on('statusLed', (led) => {
-    // console.log(led);     
-    socket.broadcast.emit('ledState',led);        
-  });    
-
-  socket.on('getstate', (data) =>{
-    console.log(data,'broad');  
-    socket.broadcast.emit('sendState', data);                
+  socket.on('statusLed', led => {
+    socket.broadcast.emit('ledState', led);
   });
 
-  
+  socket.on('getStateLed', state => {
+    socket.broadcast.emit('resStateLed', state);
+  });
+
   // set close or open a specific led
   socket.on('cool-burn', (led, status) => {
-    //io.emit('ledEvent', led, status);
-    console.log(led, status);
-    socket.broadcast.emit('ledEvent',led ,status);        
-    
+    socket.broadcast.emit('ledEvent', led, status);
   });
 
   /* DOORS */
 
   // check if a door is open(roll) or close(over)
-  // socket.on('statusDoor', (door, fn) => {
-  //   var status = doorsEngine[doors[door]].value;
-  //   if (status == 90) {
-  //     fn('over');
-  //   } else {
-  //     fn('roll');
-  //   }
-  // });
+  socket.on('statusDoor', door => {
+    socket.broadcast.emit('doorStatus', door);
+  });
 
-  // // set close or open to specific door
-  // socket.on('rollup-rollover', (door, status, fn) => {
-  //   if (status == 'over') {
-  //     doorsEngine[doors[door]].to(0, 3000, 10);
-  //     fn('roll');
-  //   } else {
-  //     doorsEngine[doors[door]].to(90, 3000, 10);
-  //     fn('over');
-  //   }
-  // });
+  socket.on('getStateDoor', state => {
+    socket.broadcast.emit('resStateDoor', state);
+  });
 
+  // set close or open to specific door
+  socket.on('rollup-rollover', (door, status) => {
+    socket.broadcast.emit('doorEvent', door, status);
+  });
+
+  socket.on('statusWindow', () => {    
+    socket.broadcast.emit('windowState');
+  });
+
+  socket.on('getStatusWindow', (state) => {
+    socket.broadcast.emit('resWindowState', state);
+  });
+
+  socket.on('wheelWindow', (status) => {
+    socket.broadcast.emit('windowEvent', status);
+  });
   /* WINDOW */
   // socket.on('wheelWindow', (status, fn) => {
   //   var rotation;

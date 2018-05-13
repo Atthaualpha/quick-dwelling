@@ -6,8 +6,8 @@ import * as io from 'socket.io-client';
 })
 export class SocketioService {
 
-  private urlIo = 'http://206.189.202.59:4028';
-  // private urlIo = 'http://localhost:4028';
+  // private urlIo = 'http://206.189.202.59:4028';
+  private urlIo = 'http://localhost:4028';
   private socket;
 
   constructor() { }
