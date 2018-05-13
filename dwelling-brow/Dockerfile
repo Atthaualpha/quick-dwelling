@@ -13,4 +13,4 @@ ENV PATH /src/node_modules/.bin:$PATH
 
 EXPOSE 4200
 
-CMD ng serve
+CMD ng serve --host 0.0.0.0
