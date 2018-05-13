@@ -8,7 +8,7 @@ var board = new j5.Board({
   repl: false
 });
 
-const leds = { home: 7, dining: 6, kitchen: 5, wash: 4, bath: 3, bed: 2 };
+const leds = { home: 9, dining: 8, kitchen: 7, wash: 6, bath: 5, bed: 4 };
 const doors = { home: 0, bed: 1, bath: 2 };
 const window = [11, 10, 9, 8];
 var stepRotation;
@@ -18,21 +18,30 @@ var windowStep;
 board.on('ready', function() {
   // doorsEngine = new j5.Servos([5, 6, 7]);
   // doorsEngine.to(90);
-  var stepper = new j5.Stepper({
-    type: j5.Stepper.TYPE.FOUR_WIRE,
-    stepsPerRev: 50,
-    pins: [11,10,9,8]
-  });
+  // var stepper = new j5.Stepper({
+  //   type: j5.Stepper.TYPE.FOUR_WIRE,
+  //   stepsPerRev: 50,
+  //   pins: [11,10,9,8]
+  // });
 
-  stepper.rpm(300).ccw().step(512, function() {
-    console.log("done");
-  });
+  // stepper.rpm(300).ccw().step(512, function() {
+  //   console.log("done");
+  // });
+  
 });
 
 app.use(morgan('dev'));
 
 app.get('/', function(req, res) {
   res.send('Hello from server for quick-dwelling :D');
+  board.i2cConfig();
+  board.i2cWrite(0x08,'hello world'.split('').map(function (c) { return c.charCodeAt(0); }));
+  board.i2cReadOnce(0x08,3,function(byter){
+    console.log(byter);
+    for (let index = 0; index  <= byter.length; index++) {
+     console.log(String.fromCharCode(byter[index]));
+    }
+  });
 });
 
 io.on('connection', function(socket) {

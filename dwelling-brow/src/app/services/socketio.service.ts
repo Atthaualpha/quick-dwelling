@@ -12,7 +12,7 @@ export class SocketioService {
   constructor() { }
 
   ioConnect() {
-    this.socket = io.connect(this.urlIo);
+    // this.socket = io.connect(this.urlIo);
     console.log('connected');
   }
 
