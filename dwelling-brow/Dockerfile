@@ -9,6 +9,8 @@ COPY . ./src
 
 WORKDIR /src
 
+ENV PATH /src/node_modules/.bin:$PATH
+
 EXPOSE 4200
 
 CMD ng serve
