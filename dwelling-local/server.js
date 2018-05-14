@@ -3,7 +3,7 @@ const server = require('http').Server(app);
 const j5 = require('johnny-five');
 const io = require('socket.io-client');
 
-const socket = io('http://localhost:4028', {});
+const socket = io('http://206.189.203.129:4028', {});
 var board;
 var board = new j5.Board({
   repl: false,
@@ -16,7 +16,7 @@ board.on('ready', function() {
   board.i2cConfig();
   doorsEngine = new j5.Servos([10, 11, 13]);
   doorsEngine.to(0);
-  // setInterval(readThermometer, 3000);
+  setInterval(readThermometer, 5000);
 });
 
 const leds = { home: 9, dining: 8, kitchen: 7, wash: 6, bath: 5, bed: 4 };
