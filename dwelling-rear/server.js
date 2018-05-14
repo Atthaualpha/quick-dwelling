@@ -32,14 +32,12 @@ io.on('connection', function(socket) {
     socket.broadcast.emit('doorStatus', door);
   });
 
-  socket.on('getStateDoor', state => {
-    console.log(state);
+  socket.on('getStateDoor', state => {    
     socket.broadcast.emit('resStateDoor', state);
   });
 
   // set close or open to specific door
-  socket.on('rollup-rollover', (door, status) => {
-    console.log(status);
+  socket.on('rollup-rollover', (door, status) => {    
     socket.broadcast.emit('doorEvent', door, status);
   });
 
@@ -55,6 +53,13 @@ io.on('connection', function(socket) {
 
   socket.on('wheelWindow', (status) => {
     socket.broadcast.emit('windowEvent', status);
+  });
+  
+  /**
+   * THERMOMETER
+   */
+  socket.on('getStatusThempt', (status) => {
+    socket.broadcast.emit('resThemptState', status);
   });
   
 });

@@ -20,12 +20,18 @@ int right_steps [ 4 ][ 4 ] =
 // Pin 9 a IN2
 // Pin 8 a IN1
 int pins[4] = {11, 10, 9, 8};
+// pin sensor de temperatura
+int pinTemp = A0;
+//led alerta termometro
+int pinDanger = 7;
+
 void setup() {
   Wire.begin(8); // establece conexion i2c con direccion #8
   Serial.begin(9600);
   for (int j = 0; j < 4; j++) {
     pinMode(pins[j], OUTPUT);
   }
+  pinMode(pinDanger,OUTPUT);
   Wire.onReceive(writeEvent);
   Wire.onRequest(readEvent);
 }
@@ -78,7 +84,20 @@ void writeEvent(int value) {
 
 void readEvent() {
   Serial.print("read event");
+  // window write
+  Wire.write('w');
   Wire.write(windowState);
+  //termometro write
+  Wire.write('t');  
+  int tempt = analogRead(pinTemp);    
+  int centigrados = abs((500*tempt/1024)); 
+  Serial.print(centigrados);
+  if(centigrados > 35){
+    digitalWrite(pinDanger,HIGH);
+  }else{
+    digitalWrite(pinDanger,LOW);
+  }
+  Wire.write(centigrados);
 }
 
 

@@ -8,6 +8,8 @@ import { Location } from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  private socket;
+  thempt = 0;
   constructor(
     private socketService: SocketioService,
     private location: Location
@@ -15,6 +17,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.socketService.ioConnect();
+    this.socket = this.socketService.getSocket();
+    this.socket.on('resThemptState', state => {
+      this.thempt = state;
+    });
   }
 
   goBack() {
