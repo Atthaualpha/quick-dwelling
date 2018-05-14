@@ -23,7 +23,7 @@ int pins[4] = {11, 10, 9, 8};
 void setup() {
   Wire.begin(8); // establece conexion i2c con direccion #8
   Serial.begin(9600);
-  for (int j = 0; i < 4; j++) {
+  for (int j = 0; j < 4; j++) {
     pinMode(pins[j], OUTPUT);
   }
   Wire.onReceive(writeEvent);
@@ -84,7 +84,7 @@ void readEvent() {
 
 void right_dir() {
   for (int i = 0; i < 4; i++) {
-    for (int j = 0; i < 4; j++) {
+    for (int j = 0; j < 4; j++) {
       digitalWrite(pins[j], right_steps[i][j]);
     }
     delay(retardo);
@@ -93,7 +93,7 @@ void right_dir() {
 
 void left_dir() {        // Pasos a la izquierda
   for (int i = 0; i < 4; i++) {
-    for (int j = 0; i < 4; j++) {
+    for (int j = 0; j < 4; j++) {
       digitalWrite(pins[j], left_steps[i][j]);
     }
     delay(retardo);
@@ -101,7 +101,7 @@ void left_dir() {        // Pasos a la izquierda
 }
 
 void engine_off() {         // Apagado del Motor
-  for (int j = 0; i < 4; j++) {
+  for (int j = 0; j < 4; j++) {
     digitalWrite(pins[j], 0);
   }
 }

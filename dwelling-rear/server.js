@@ -33,11 +33,13 @@ io.on('connection', function(socket) {
   });
 
   socket.on('getStateDoor', state => {
+    console.log(state);
     socket.broadcast.emit('resStateDoor', state);
   });
 
   // set close or open to specific door
   socket.on('rollup-rollover', (door, status) => {
+    console.log(status);
     socket.broadcast.emit('doorEvent', door, status);
   });
 
