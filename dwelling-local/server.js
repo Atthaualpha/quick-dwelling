@@ -3,7 +3,7 @@ const server = require('http').Server(app);
 const j5 = require('johnny-five');
 const io = require('socket.io-client');
 
-const socket = io('http://206.189.203.129:4028', {});
+const socket = io('http://204.48.31.92:4028', {});
 var board;
 var board = new j5.Board({
   repl: false,

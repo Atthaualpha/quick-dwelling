@@ -36,8 +36,7 @@ void setup() {
   Wire.onRequest(readEvent);
 }
 
-void loop() {
-
+void loop() {  
   if (flagEngine != 'n') {
     int degreesEngine = 0;
     if (flagEngine == 'd') {
@@ -90,14 +89,15 @@ void readEvent() {
   //termometro write
   Wire.write('t');  
   int tempt = analogRead(pinTemp);    
-  int centigrados = abs((500*tempt/1024)); 
+  float centigrados = (500.0*tempt/1024); 
+  int centi = (int) abs(centigrados);
   Serial.print(centigrados);
   if(centigrados > 35){
     digitalWrite(pinDanger,HIGH);
   }else{
     digitalWrite(pinDanger,LOW);
   }
-  Wire.write(centigrados);
+  Wire.write(centi);
 }
 
 
