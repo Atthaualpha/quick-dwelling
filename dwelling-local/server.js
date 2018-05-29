@@ -3,24 +3,27 @@ const server = require('http').Server(app);
 const j5 = require('johnny-five');
 const io = require('socket.io-client');
 
-const socket = io('http://204.48.31.92:4028', {});
+// const socket = io('http://204.48.31.92:4028', {});
+const socket = io('http://localhost:4028', {});
 var board;
 var board = new j5.Board({
   repl: false,
-  port: 'COM6'
+  port: 'COM8'
 });
 
 var doorsEngine;
 
 board.on('ready', function() {
-  board.i2cConfig();
+ // board.i2cConfig();
   doorsEngine = new j5.Servos([10, 11, 13]);
-  doorsEngine.to(0);
-  setInterval(readThermometer, 5000);
+  doorsEngine[2].to(70);
+  doorsEngine[1].to(0); 
+  doorsEngine[0].to(70);  
+// setInterval(readThermometer, 5000);
 });
 
 const leds = { home: 9, dining: 8, kitchen: 7, wash: 6, bath: 5, bed: 4 };
-const doors = { home: 0, bed: 1, bath: 2 };
+const doors = { home: 2,  bath: 1, bed: 0 };
 
 socket.on('connect', () => {
   console.log('conected');
@@ -61,19 +64,22 @@ socket.on('ledEvent', (led, status) => {
  */
 socket.on('doorStatus', door => {
   var status = doorsEngine[doors[door]].value;  
-  if (status == 90) {
-    socket.emit('getStateDoor', 'over');
-  } else {
+  if ((status == 70 && doors[door]) == 1 || (status == 0 && doors[door] != 1)) {
     socket.emit('getStateDoor', 'roll');
-  }
+  } else {
+    socket.emit('getStateDoor', 'over');
+    
+  } 
 });
 
 socket.on('doorEvent', (door, status) => {  
   if (status == 'over') {
-    doorsEngine[doors[door]].to(0, 1000, 10);
+    var grados = (doors[door] == 1 ? 70 : 0);    
+    doorsEngine[doors[door]].to(grados, 1000, 20);
     socket.emit('getStateDoor', 'roll');
   } else {
-    doorsEngine[doors[door]].to(90, 1000, 10);
+    var grados = (doors[door] == 1 ? 0 : 70);    
+    doorsEngine[doors[door]].to(grados, 1000, 10);
     socket.emit('getStateDoor', 'over');
   }
 });

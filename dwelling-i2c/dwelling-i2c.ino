@@ -39,8 +39,8 @@ void setup() {
 void loop() {  
   if (flagEngine != 'n') {
     int degreesEngine = 0;
-    if (flagEngine == 'd') {
-      degreesEngine = (-500 * 1.4222222222);
+    if (flagEngine == 'u') {
+      degreesEngine = (-400 * 1.4222222222);
       delay(50);
       while (degreesEngine < 0) {
         right_dir();
@@ -49,8 +49,8 @@ void loop() {
       engine_off();
       windowState = 'd';
       flagEngine = 'n';
-    } else if (flagEngine == 'u') {
-      degreesEngine = (500 * 1.4222222222);
+    } else if (flagEngine == 'd') {
+      degreesEngine = (0);
       delay(50);
       while (degreesEngine > 0) {
         left_dir();
