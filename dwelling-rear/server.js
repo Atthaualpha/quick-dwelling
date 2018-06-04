@@ -10,6 +10,15 @@ app.get('/', function(req, res) {
 });
 
 io.on('connection', function(socket) {
+
+  socket.on('burn-all', () =>{
+    socket.broadcast.emit('ledsOn');
+  });
+
+  socket.on('cool-all', () =>{
+    socket.broadcast.emit('ledsOff');
+  });
+
   /* LED */
   // check if led is on or off
   socket.on('statusLed', led => {

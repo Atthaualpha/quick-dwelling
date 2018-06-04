@@ -40,24 +40,24 @@ void loop() {
   if (flagEngine != 'n') {
     int degreesEngine = 0;
     if (flagEngine == 'u') {
-      degreesEngine = (-400 * 1.4222222222);
+      degreesEngine = (-480 * 1.4222222222);
       delay(50);
       while (degreesEngine < 0) {
         right_dir();
         degreesEngine += 1;
       }
       engine_off();
-      windowState = 'd';
+      windowState = 'u';
       flagEngine = 'n';
     } else if (flagEngine == 'd') {
-      degreesEngine = (0);
+      degreesEngine = (480 * 1.4222222222);
       delay(50);
       while (degreesEngine > 0) {
         left_dir();
         degreesEngine -= 1;
       }
       engine_off();
-      windowState = 'u';
+      windowState = 'd';
       flagEngine = 'n';
     }
   }

@@ -1,6 +1,16 @@
 <div class="container-fluid">
   <div style="margin-top: 5%">
     <div class="row align-items-center text-center slideInLeft animated">
+      <div class="col align-self-start" style="cursor: pointer;">
+        <i class="fas fa-power-off fa-3x" (click)="encenderCasa()" style="color: #24fb00"></i>
+        <p>Encender Casa</p>
+      </div>
+      <div class="col align-self-end" style="cursor: pointer;">
+        <i class="fas fa-power-off fa-3x" style="color:red " (click)="apagarCasa()"></i>
+        <p>Apagar Casa</p>
+      </div>
+    </div>
+    <div class="row align-items-center text-center slideInLeft animated">
       <div class="col align-self-start" style="cursor: pointer;" [routerLink]="['/eventlights', 'home']" routerLinkActive="router-link-active">
         <img src="../../../assets/imgs/home.svg" style="width: 180px; height: 144px">
         <p>Entrada</p>

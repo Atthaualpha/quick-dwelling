@@ -8,18 +8,18 @@ const socket = io('http://localhost:4028', {});
 var board;
 var board = new j5.Board({
   repl: false,
-  port: 'COM8'
+  port: 'COM6'
 });
 
 var doorsEngine;
 
 board.on('ready', function() {
- // board.i2cConfig();
+   board.i2cConfig();
   doorsEngine = new j5.Servos([10, 11, 13]);
   doorsEngine[2].to(70);
   doorsEngine[1].to(0); 
   doorsEngine[0].to(70);  
-// setInterval(readThermometer, 5000);
+  setInterval(readThermometer, 5000);
 });
 
 const leds = { home: 9, dining: 8, kitchen: 7, wash: 6, bath: 5, bed: 4 };
@@ -59,6 +59,24 @@ socket.on('ledEvent', (led, status) => {
   }
 });
 
+// Turn on all leds
+socket.on('ledsOn', () => {
+  Object.keys(leds).forEach(function(l){    
+    led = leds[l];
+    board.pinMode(led, j5.Pin.OUTPUT);
+    board.digitalWrite(led, 1);
+  });
+});
+
+// Turn off all leds
+socket.on('ledsOff', () => {
+  Object.keys(leds).forEach(function(l){    
+    led = leds[l];
+    board.pinMode(led, j5.Pin.OUTPUT);
+    board.digitalWrite(led, 0);
+  });
+});
+
 /**
  * DOOR
  */
@@ -88,7 +106,7 @@ socket.on('doorEvent', (door, status) => {
  * WINDOW
  */
 socket.on('windowState', () => {
-  var status;
+  var status;  
   board.i2cReadOnce(0x08, 2, function(state) {
     for (let index = 0; index < state.length; index++) {
       charByte = String.fromCharCode(state[index]);
